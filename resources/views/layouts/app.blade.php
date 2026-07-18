@@ -29,6 +29,26 @@
 
             <!-- Page Content -->
             <main>
+                @if (session('success'))
+                    <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+                        <div class="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+                        <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            <ul class="list-disc space-y-1 pl-5">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+
                 {{ $slot }}
             </main>
         </div>

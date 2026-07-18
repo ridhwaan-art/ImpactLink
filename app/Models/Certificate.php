@@ -13,8 +13,14 @@ class Certificate extends Model
         'certificate_number',
         'volunteer_id',
         'project_id',
+        'event_id',
+        'hours',
         'issue_date',
         'pdf_path',
+        'generated_by',
+        'status',
+        'verification_token',
+        'description',
     ];
 
     public function volunteer()
@@ -25,5 +31,15 @@ class Certificate extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function generatedBy()
+    {
+        return $this->belongsTo(User::class, 'generated_by');
     }
 }

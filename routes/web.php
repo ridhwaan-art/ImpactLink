@@ -38,7 +38,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/scan/{token}', [AttendanceController::class, 'scan'])->name('attendance.scan');
 
     Route::get('/certificates', [CertificateController::class, 'index'])->name('certificates.index');
-    Route::get('/certificates/generate', [CertificateController::class, 'generate'])->name('certificates.generate');
+    Route::get('/certificates/create', [CertificateController::class, 'create'])->name('certificates.create');
+    Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
+    Route::get('/certificates/{certificate}', [CertificateController::class, 'show'])->name('certificates.show');
+    Route::get('/certificates/{certificate}/download', [CertificateController::class, 'download'])->name('certificates.download');
+    Route::post('/certificates/{certificate}/regenerate', [CertificateController::class, 'regenerate'])->name('certificates.regenerate');
+    Route::get('/certificates/verify/{token}', [CertificateController::class, 'verify'])->name('certificates.verify');
+    Route::post('/volunteers/{volunteer}/certificates', [CertificateController::class, 'generateForVolunteer'])->name('volunteers.certificates.store');
+    Route::post('/events/{event}/certificates/generate', [CertificateController::class, 'generateForEvent'])->name('events.certificates.generate');
 
     Route::get('/search', SearchController::class)->name('search');
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
